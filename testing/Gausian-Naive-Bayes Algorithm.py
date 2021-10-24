@@ -5,6 +5,18 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import classification_report
 from datetime import datetime
 from os import system
+import RPi.GPIO as GPIO    # Import Raspberry Pi GPIO library
+from time import sleep     # Import the sleep function from the time module
+
+
+def GPIOSetup(prediction, pin_num):
+    GPIO.setwarnings(False)    # Ignore warning for now
+    GPIO.setmode(GPIO.BOARD)   # Use physical pin numbering
+    GPIO.setup(pin_num, GPIO.OUT, initial=GPIO.LOW)   # Set pin 8 to be an output pin and set initial value to low (off)
+    GPIO.output(pin_num, prediction) # Turn on or off base on prediction ( 1 -ON , 0 -OFF)
+    sleep(5)                  # Sleep for 5 second
+    GPIO.output(pin_num, GPIO.LOW)  # Turn off
+    sleep(1)
 
 # Functions
 def read_datasets(true_csv, false_csv):
@@ -61,6 +73,7 @@ def predict_user_input(model, pH_level, ec_level, area_of_lettuce):
     prediction_time = prediction_stop_time - prediction_start_time
     print('\n' + f'Model Prediction: {prediction}')
     print(f'Prediction Time: {prediction_time}')
+    return prediction
     
 # Global Scope
 true_df, false_df = read_datasets('MOCK_DATA.csv', 'MOCK_DATA-1.csv')
@@ -71,5 +84,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 model = instantiate_model(X_train, y_train)
 evaluate_model(model, X_test, y_test)
 pH_level, ec_level, area_of_lettuce = read_user_inputs()
-predict_user_input(model, pH_level, ec_level, area_of_lettuce)
+prediction = predict_user_input(model, pH_level, ec_level, area_of_lettuce)
+GPIOSetup(prediction, pin_num = 8)
 system('pause')
