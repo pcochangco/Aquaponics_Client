@@ -13,7 +13,7 @@ def GPIOSetup(prediction, pin_num):
     GPIO.setwarnings(False)    # Ignore warning for now
     GPIO.setmode(GPIO.BOARD)   # Use physical pin numbering
     GPIO.setup(pin_num, GPIO.OUT, initial=GPIO.LOW)   # Set pin 8 to be an output pin and set initial value to low (off)
-    GPIO.output(pin_num, prediction) # Turn on or off base on prediction ( 1 -ON , 0 -OFF)
+    GPIO.output(pin_num, int(prediction)) # Turn on or off base on prediction ( 1 -ON , 0 -OFF)
     sleep(5)                  # Sleep for 5 second
     GPIO.output(pin_num, GPIO.LOW)  # Turn off
     sleep(1)
