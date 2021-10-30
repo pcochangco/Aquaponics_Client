@@ -29,7 +29,7 @@ while True:
         s = setupClient_to_ServerConnection()
         user = input("")
         client_data = "This is the CLient: What is the lettuce area ?"
-        s.send(str.encode(client_data)
+        s.send(str.encode(client_data))
        
         # this line is where the client hear back from server
         signal.alarm(120) #set timer to 2mins if the server took long to send data - redo the connection
