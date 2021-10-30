@@ -20,9 +20,9 @@ def setupClient_to_ServerConnection():
     s.connect((host,port))
     return s
     
-def handler(signum, frame):
-    raise Exception()
-signal.signal(signal.SIGALRM, handler) 
+#def handler(signum, frame):
+#    raise Exception()
+#signal.signal(signal.SIGALRM, handler) 
 
 while True:
     try: 
@@ -32,9 +32,9 @@ while True:
         s.send(str.encode(client_data)
        
         # this line is where the client hear back from server
-        signal.alarm(120) #set timer to 2mins if the server took long to send data - redo the connection
+        #signal.alarm(120) #set timer to 2mins if the server took long to send data - redo the connection
         lettuce_area = s.recv(1024)
-        signal.alarm(0)
+        #signal.alarm(0)
        
         s.close()
         print("Data from server (lettuce area): ",lettuce_area.decode('utf-8'))
