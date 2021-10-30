@@ -4,44 +4,37 @@ Created on Sep 23 13:35:41 2021
 
 @author: pcochangco
 """
+#!/usr/bin/env python3
 
 import socket
-import signal
 import time
 
-host = 'replace with ip of server (raspi with camera)'
-port = 1403
-execution_wait_time = 1 #3600 set to 1Hr interval
+HOST = '172.20.10.7'  # The server's hostname or IP address
+PORT = 65432        # The port used by the server
 
 
+def lettuceArea():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        while True:
+            try:
+                print("Trying to Connect to server..")
+                s.connect((HOST, PORT))
+                print("Connected!")
+                break
+            except Exception as e:
+                print(e)
+                time.sleep(1)
+        s.sendall(str.encode('Requesting to send the lettuce area'))
+        while True:
+            try:
+                print("Waiting to receive the from Server")
+                data = s.recv(1024)
+                print("Data received from Server, Lettuce Area:", data.decode('utf-8'))
+                break
+            except Exception as e:
+                print(e)
+                time.sleep(1)
+            
+    return int(data.decode('utf-8'))
 
-def setupClient_to_ServerConnection():
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((host,port))
-    return s
-    
-def handler(signum, frame):
-    raise Exception()
-signal.signal(signal.SIGALRM, handler) 
-
-while True:
-    try: 
-        s = setupClient_to_ServerConnection()
-        user = input("")
-        client_data = "This is the CLient: What is the lettuce area ?"
-        s.send(str.encode(client_data))
-       
-        # this line is where the client hear back from server
-        signal.alarm(120) #set timer to 2mins if the server took long to send data - redo the connection
-        lettuce_area = s.recv(1024)
-        signal.alarm(0)
-       
-        s.close()
-        print("Data from server (lettuce area): ",lettuce_area.decode('utf-8'))
-        
-        #######define the function to measure sensors
-        ######define function here for Naive Bayles Probability
-
-        time.sleep(execution_wait_time)
-    except:
-        time.sleep(1)
+print(lettuceArea())
