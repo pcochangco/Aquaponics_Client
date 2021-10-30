@@ -35,6 +35,6 @@ def lettuceArea():
                 print(e)
                 time.sleep(1)
             
-    return int(data.decode('utf-8'))
+    return float(data.decode('utf-8'))
 
 print(lettuceArea())
