@@ -13,6 +13,7 @@ import RPi.GPIO as GPIO    # Import Raspberry Pi GPIO library
 ##################### For EC and PH Sensor#######################
 import time
 import sys
+import os
 
 sys.path.insert(0,'Aquaponics_Client/testing/DFRobot_ADS1115/RaspberryPi/Python/')
 from DFRobot_ADS1115 import ADS1115
