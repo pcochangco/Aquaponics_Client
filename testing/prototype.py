@@ -6,7 +6,6 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import classification_report
 from datetime import datetime
 import RPi.GPIO as GPIO    # Import Raspberry Pi GPIO library
-import time    # Import the sleep function from the time module
 ##################### For Gaussian machine Learning#######################
 
 
@@ -361,9 +360,12 @@ X, y = separate_variables(merged_df)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 model = instantiate_model(X_train, y_train)
 evaluate_model(model, X_test, y_test)
-pH_level, ec_level = read_ph_ec()
-start_with_motor = timeit.default_timer()
-area_of_lettuce = Lettuce_Area()
-prediction = predict_user_input(model, pH_level, ec_level, area_of_lettuce)
-datalog(pH_level, ec_level, area_of_lettuce)
-GPIOSetup(prediction, pin_num = 8)
+
+while True:
+    pH_level, ec_level = read_ph_ec()
+    start_with_motor = timeit.default_timer()
+    area_of_lettuce = Lettuce_Area()
+    prediction = predict_user_input(model, pH_level, ec_level, area_of_lettuce)
+    datalog(pH_level, ec_level, area_of_lettuce)
+    GPIOSetup(prediction, pin_num = 8)
+    time.sleep(60*30)
