@@ -369,5 +369,5 @@ while True:
     prediction = predict_user_input(model, pH_level, ec_level, area_of_lettuce)
     datalog(pH_level, ec_level, area_of_lettuce)
     GPIOSetup(prediction, pin_num = 8)
-    print("Timer ON, please wait 30 minutes for the next measurement.)
+    print("Timer ON, please wait 30 minutes for the next measurement.")
     time.sleep(60*30)
