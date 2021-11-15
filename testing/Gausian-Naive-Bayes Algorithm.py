@@ -15,7 +15,7 @@ import time    # Import the sleep function from the time module
 import time
 import sys
 
-sys.path.insert(0,'Aquaponics/DFRobot_ADS1115/RaspberryPi/Python/')
+sys.path.insert(0,'Aquaponics_Client/DFRobot_ADS1115/RaspberryPi/Python/')
 from DFRobot_ADS1115 import ADS1115
 
 ADS1115_REG_CONFIG_PGA_6_144V        = 0x00 # 6.144V range = Gain 2/3
