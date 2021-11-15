@@ -6,7 +6,7 @@ from sklearn.metrics import classification_report
 from datetime import datetime
 from os import system
 import RPi.GPIO as GPIO    # Import Raspberry Pi GPIO library
-from time import sleep     # Import the sleep function from the time module
+import time    # Import the sleep function from the time module
 
 
 def GPIOSetup(prediction, pin_num, turn_on_time = 5):
@@ -16,7 +16,7 @@ def GPIOSetup(prediction, pin_num, turn_on_time = 5):
     if int(prediction):
         print("Turning the valve on."
         GPIO.output(pin_num, 1) # Turn on or off base on prediction ( 1 -ON , 0 -OFF)
-        sleep(turn_on_time)
+        time.sleep(turn_on_time)
     else: print("Valve remains off")
     GPIO.output(pin_num, GPIO.LOW)  # Turn off
 
