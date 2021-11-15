@@ -4,7 +4,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import classification_report
 from datetime import datetime
-from os import system
 import RPi.GPIO as GPIO    # Import Raspberry Pi GPIO library
 import time    # Import the sleep function from the time module
 
@@ -88,4 +87,3 @@ evaluate_model(model, X_test, y_test)
 pH_level, ec_level, area_of_lettuce = read_user_inputs()
 prediction = predict_user_input(model, pH_level, ec_level, area_of_lettuce)
 GPIOSetup(prediction, pin_num = 8)
-system('pause')
