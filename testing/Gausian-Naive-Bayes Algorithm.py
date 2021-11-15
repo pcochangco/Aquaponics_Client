@@ -10,6 +10,7 @@ import time    # Import the sleep function from the time module
 ##################### For Gaussian machine Learning#######################
 
 
+
 ##################### For EC and PH Sensor#######################
 import time
 import sys
@@ -29,7 +30,7 @@ def GPIOSetup(prediction, pin_num, turn_on_time = 5):
     GPIO.setmode(GPIO.BOARD)   # Use physical pin numbering
     GPIO.setup(pin_num, GPIO.OUT, initial=GPIO.LOW)   # Set pin 8 to be an output pin and set initial value to low (off)
     if int(prediction):
-        print("Turning the valve on."
+        print("Turning the valve on.")
         GPIO.output(pin_num, 1) # Turn on or off base on prediction ( 1 -ON , 0 -OFF)
         time.sleep(turn_on_time)
     else: print("Valve remains off")
@@ -133,6 +134,19 @@ def read_ph_ec():
     print("Temperature:%.1f ^C EC:%.2f ms/cm PH:%.2f " %(temperature,EC,PH))
     return PH, EC
               
+def datalog(PH, EC, Size):
+    import os
+    from datetime import datetime
+    dt_string = datetime.now().strftime("%d/%m/%Y")
+    tm_string = datetime.now().strftime("%H:%M:%S")
+    
+    if os.path.isfile('output.csv'):
+        with open('output.csv', 'a') as f:
+            f.write(str(dt_string) + "," + str(tm_string) + "," + PH + "," + EC + "," + Size + "\n")
+    else: 
+        with open('output.csv', 'a') as f:
+            f.write("Date" + "," + "Time" + "," + "PH Sensor" + "," + "EC Sensor" + "," + "Lettuce Area (in^2)" + "\n") 
+            f.write(str(dt_string) + "," + str(tm_string) + "," + PH + "," + EC + "," + Size + "\n")              
               
 ads1115 = ADS1115()
 ##################### For EC and PH Sensor#######################    
@@ -149,5 +163,5 @@ evaluate_model(model, X_test, y_test)
 pH_level, ec_level = read_ph_ec()
 area_of_lettuce = read_user_inputs()
 prediction = predict_user_input(model, pH_level, ec_level, area_of_lettuce)
-
+datalog(pH_level, ec_level, area_of_lettuce)
 GPIOSetup(prediction, pin_num = 8)
