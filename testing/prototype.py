@@ -159,7 +159,7 @@ def datalog(PH, EC, Size):
     else: 
         with open('output.csv', 'a') as f:
             f.write("Date" + "," + "Time" + "," + "PH Sensor" + "," + "EC Sensor" + "," + "Lettuce Area (in^2)" + "\n") 
-            f.write(str(dt_string) + "," + str(tm_string) + "," + PH + "," + EC + "," + Size + "\n")              
+            f.write(str(dt_string) + "," + str(tm_string) + "," + str(PH) + "," + str(EC) + "," + str(Size) + "\n")              
               
 ads1115 = ADS1115()
 ##################### For EC and PH Sensor#######################    
@@ -233,7 +233,7 @@ def get_max_contour(contours):
     c = max(contours, key = cv2.contourArea)
     return c
 
-def process_Image(directory):
+def process_Image(directory, results_path):
     global start_image_processing, stop_image_processing
     overall_area = []
     for filename in os.listdir(directory):
@@ -342,7 +342,7 @@ def Lettuce_Area():
     print("")
     print("Computing the area...")
     try: 
-        size = process_Image(directory)
+        size = process_Image(directory, results_path)
         print("")
         print("Image processing time per image: {}sec ".format(round(stop_image_processing - start_image_processing,2)))
     except Exception as e: 
