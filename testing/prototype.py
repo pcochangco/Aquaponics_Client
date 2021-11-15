@@ -155,7 +155,7 @@ def datalog(PH, EC, Size):
     
     if os.path.isfile('output.csv'):
         with open('output.csv', 'a') as f:
-            f.write(str(dt_string) + "," + str(tm_string) + "," + PH + "," + EC + "," + Size + "\n")
+            f.write(str(dt_string) + "," + str(tm_string) + "," + str(PH) + "," + str(EC) + "," + str(Size) + "\n")
     else: 
         with open('output.csv', 'a') as f:
             f.write("Date" + "," + "Time" + "," + "PH Sensor" + "," + "EC Sensor" + "," + "Lettuce Area (in^2)" + "\n") 
