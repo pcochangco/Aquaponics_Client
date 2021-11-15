@@ -9,17 +9,16 @@ import RPi.GPIO as GPIO    # Import Raspberry Pi GPIO library
 from time import sleep     # Import the sleep function from the time module
 
 
-def GPIOSetup(prediction, pin_num):
+def GPIOSetup(prediction, pin_num, turn_on_time = 5):
     GPIO.setwarnings(False)    # Ignore warning for now
     GPIO.setmode(GPIO.BOARD)   # Use physical pin numbering
     GPIO.setup(pin_num, GPIO.OUT, initial=GPIO.LOW)   # Set pin 8 to be an output pin and set initial value to low (off)
     if int(prediction):
         print("Turning the valve on."
+        GPIO.output(pin_num, 1) # Turn on or off base on prediction ( 1 -ON , 0 -OFF)
+        sleep(turn_on_time)
     else: print("Valve remains off")
-    GPIO.output(pin_num, int(prediction)) # Turn on or off base on prediction ( 1 -ON , 0 -OFF)
-    sleep(5)                  # Sleep for 5 second
     GPIO.output(pin_num, GPIO.LOW)  # Turn off
-    sleep(1)
 
 # Functions
 def read_datasets(true_csv, false_csv):
