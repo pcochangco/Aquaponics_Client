@@ -353,7 +353,7 @@ def Lettuce_Area():
                
 # Global Scope
 
-true_df, false_df = read_datasets('MOCK_DATA.csv', 'MOCK_DATA-1.csv')
+true_df, false_df = read_datasets('Aquaponics_Client/testing/MOCK_DATA.csv', 'Aquaponics_Client/testing/MOCK_DATA-1.csv')
 add_target_variables(true_df, false_df)
 merged_df = merge_datasets(true_df, false_df)
 X, y = separate_variables(merged_df)
