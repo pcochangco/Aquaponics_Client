@@ -15,7 +15,7 @@ import time
 import sys
 import os
 
-sys.path.insert(0,'Aquaponics_Client/testing/DFRobot_ADS1115/RaspberryPi/Python/')
+sys.path.insert(0,'Hydroponics/testing/')
 from DFRobot_ADS1115 import ADS1115
 
 ADS1115_REG_CONFIG_PGA_6_144V        = 0x00 # 6.144V range = Gain 2/3
@@ -354,7 +354,7 @@ def Lettuce_Area():
                
 # Global Scope
 
-true_df, false_df = read_datasets('Aquaponics_Client/testing/MOCK_DATA.csv', 'Aquaponics_Client/testing/MOCK_DATA-1.csv')
+true_df, false_df = read_datasets('Hydroponics/testing/MOCK_DATA.csv', 'Hydroponics/testing/MOCK_DATA-1.csv')
 add_target_variables(true_df, false_df)
 merged_df = merge_datasets(true_df, false_df)
 X, y = separate_variables(merged_df)
