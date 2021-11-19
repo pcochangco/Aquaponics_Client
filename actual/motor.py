@@ -13,7 +13,7 @@ GPIO.setwarnings(False)
 capture = capture()
 
 class run():
-    def cleanup(in1, in2, in3, in4):
+    def cleanup(self, in1, in2, in3, in4):
         GPIO.output( in1, 0 )
         GPIO.output( in2, 0 )
         GPIO.output( in3, 0 )
