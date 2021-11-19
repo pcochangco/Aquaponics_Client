@@ -30,6 +30,8 @@ directory = "/home/pi/Pictures0/"
 results_path = "/home/pi/results"
 directory = capture.clean_dir(directory)
 capture.clean_dir(results_path)
+turn_off_time = 1800 #(in seconds)
+
 
 while True:
     pH_level, ec_level = sense.read_ph_ec()
@@ -41,9 +43,12 @@ while True:
     
     prediction = ML.predict_user_input(model, pH_level, ec_level, area_of_lettuce)
 
-    trigger.pump_ON(prediction, pin_num = 8, turn_on_time = 5)
+    trigger.pump_ON(prediction, pin_num = 8)
     #pin num is where the relay for pump should be connected. turn on time is the time in seconds, the pump will turn on
 
     
     print("Timer ON, please wait 30 minutes for the next measurement.")
-    time.sleep(1800)  #sleep for 30mins
+    for x in range(1800): #1800 seconds
+        time.sleep(1)
+        if x = turn_off_time -1:
+            trigger.pump_OFF(pin_num = 8)
