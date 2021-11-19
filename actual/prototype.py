@@ -16,6 +16,13 @@ from motor import run
 from pump import trigger
 import time
 
+ML = ML()
+sense = sense()
+capture = capture()
+IP = IP()
+run = run()
+trigger = trigger()
+
 true_df, false_df = ML.read_datasets('Hydroponics/actual/MOCK_DATA.csv', 'Hydroponics/actual/MOCK_DATA-1.csv')
 model = ML.train_model(true_df, false_df )
 
