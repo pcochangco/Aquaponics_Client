@@ -27,7 +27,7 @@ class ML():
         
     
     
-    def read_datasets(self,true_csv, false_csv):
+    def read_datasets(true_csv, false_csv):
         true_df = pd.read_csv(true_csv)
         false_df = pd.read_csv(false_csv)
         return true_df, false_df
