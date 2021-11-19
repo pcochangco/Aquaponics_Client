@@ -10,7 +10,7 @@ import timeit
 from camera import capture
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-
+capture = capture()
 
 class run():
     def cleanup(in1, in2, in3, in4):
