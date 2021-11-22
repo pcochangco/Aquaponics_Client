@@ -50,5 +50,5 @@ while True:
     print("Timer ON, please wait 30 minutes for the next measurement.")
     for x in range(over_all_run_time): #1800 seconds
         time.sleep(1)
-        if x = turn_off_time -1:
+        if x == turn_off_time -1:
             trigger.pump_OFF(pin_num = 8)
