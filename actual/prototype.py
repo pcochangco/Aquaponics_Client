@@ -31,7 +31,7 @@ results_path = "/home/pi/results"
 directory = capture.clean_dir(directory)
 capture.clean_dir(results_path)
 turn_off_time = 1800 #(in seconds)
-
+over_all_run_time = 1800 #(in seconds)
 
 while True:
     pH_level, ec_level = sense.read_ph_ec()
@@ -48,7 +48,7 @@ while True:
 
     
     print("Timer ON, please wait 30 minutes for the next measurement.")
-    for x in range(1800): #1800 seconds
+    for x in range(over_all_run_time): #1800 seconds
         time.sleep(1)
         if x = turn_off_time -1:
             trigger.pump_OFF(pin_num = 8)
