@@ -108,9 +108,11 @@ class IP():
             size, qty = self.process_Image(directory, results_path)
             stop_image_processing = timeit.default_timer()
             print("")
-            print("Image processing time per image: {}sec ".format(round((stop_image_processing - start_image_processing)/qty,2)))
+            ip_time = round((stop_image_processing - start_image_processing),2)
+            print("Image processing time per image: {}sec ".format(ip_time))
         except Exception as e: 
             print(" Error Image Processing...\n", e)
             size = 0
+            ip_time = 0
         
-        return size        
+        return size, ip_time       
