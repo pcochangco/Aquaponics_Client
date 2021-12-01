@@ -37,9 +37,9 @@ while True:
     pH_level, ec_level = sense.read_ph_ec()
     
     run.motor_and_capture(directory)
-    area_of_lettuce = IP.Lettuce_Area(directory,results_path)
+    area_of_lettuce, ip_time = IP.Lettuce_Area(directory,results_path)
     
-    sense.datalog(pH_level, ec_level, area_of_lettuce)
+    sense.datalog(pH_level, ec_level, area_of_lettuce, ip_time, train_time, predict_time, accuracy)
     
     prediction = ML.predict_user_input(model, pH_level, ec_level, area_of_lettuce)
 
