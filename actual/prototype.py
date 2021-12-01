@@ -24,7 +24,7 @@ run = run()
 trigger = trigger()
 
 true_df, false_df = ML.read_datasets('Hydroponics/actual/MOCK_DATA.csv', 'Hydroponics/actual/MOCK_DATA-1.csv')
-model = ML.train_model(true_df, false_df )
+model, train_time, accuracy = ML.train_model(true_df, false_df )
 
 directory = "/home/pi/Pictures0/"
 results_path = "/home/pi/results"
@@ -39,7 +39,7 @@ while True:
     run.motor_and_capture(directory)
     area_of_lettuce, ip_time = IP.Lettuce_Area(directory,results_path)
     
-    prediction = ML.predict_user_input(model, pH_level, ec_level, area_of_lettuce)
+    prediction, predict_time = ML.predict_user_input(model, pH_level, ec_level, area_of_lettuce)
     
     sense.datalog(pH_level, ec_level, area_of_lettuce, ip_time, train_time, predict_time, accuracy)
     
