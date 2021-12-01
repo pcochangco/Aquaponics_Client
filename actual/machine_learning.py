@@ -10,7 +10,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import classification_report
-from datetime import datetime
+import timeit
 ##################### For Gaussian machine Learning#######################
 
 class ML():
@@ -20,10 +20,10 @@ class ML():
         merged_df = self.merge_datasets(true_df, false_df)
         X, y = self.separate_variables(merged_df)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-        model = self.instantiate_model(X_train, y_train)
-        self.evaluate_model(model, X_test, y_test)
+        model, train_time = self.instantiate_model(X_train, y_train)
+        accuracy = self.evaluate_model(model, X_test, y_test)
         
-        return model
+        return model, train_time, accuracy
         
     
     
@@ -46,18 +46,19 @@ class ML():
         return X, y
     
     def instantiate_model(self,X_train, y_train):
-        training_start_time = datetime.now()
+        training_start_time = timeit.default_timer()
         model = GaussianNB()
         model.fit(X_train, y_train)
-        training_stop_time = datetime.now()
+        training_stop_time = timeit.default_timer()
         training_time = training_stop_time - training_start_time
         print(f'Training Time: {training_time}')
-        return model    
+        return model, training_time 
     
     def display_model_accuracy(self, model, X_test, y_test):
         accuracy = model.score(X_test, y_test)
         accuracy *= 100
         print(f'Model Accuracy: {accuracy}%' + '\n')
+        return accuracy
     
     def display_classification_report(self, model, X_test,y_test):
         print('Classification Report:')
@@ -65,16 +66,16 @@ class ML():
         print(classification_report(y_test, y_pred))
         
     def evaluate_model(self, model, X_test, y_test):
-        self.display_model_accuracy(model, X_test, y_test)
+        acc = self.display_model_accuracy(model, X_test, y_test)
         self.display_classification_report(model, X_test ,y_test)
-        
+        return acc
         
     def predict_user_input(self, model, pH_level, ec_level, area_of_lettuce):
-        prediction_start_time = datetime.now()
+        prediction_start_time = timeit.default_timer()
         prediction = model.predict([[pH_level, ec_level, area_of_lettuce]])[0]
-        prediction_stop_time = datetime.now()
+        prediction_stop_time = timeit.default_timer()
         prediction_time = prediction_stop_time - prediction_start_time
         print('\n' + f'Model Prediction: {prediction}')
         print(f'Prediction Time: {prediction_time}')
-        return prediction
+        return prediction, prediction_time
                   
