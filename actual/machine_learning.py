@@ -50,7 +50,7 @@ class ML():
         model = GaussianNB()
         model.fit(X_train, y_train)
         training_stop_time = timeit.default_timer()
-        training_time = training_stop_time - training_start_time
+        training_time = round(training_stop_time - training_start_time, 4)
         print(f'Training Time: {training_time}')
         return model, training_time 
     
@@ -74,7 +74,7 @@ class ML():
         prediction_start_time = timeit.default_timer()
         prediction = model.predict([[pH_level, ec_level, area_of_lettuce]])[0]
         prediction_stop_time = timeit.default_timer()
-        prediction_time = prediction_stop_time - prediction_start_time
+        prediction_time = round(prediction_stop_time - prediction_start_time, 4)
         print('\n' + f'Model Prediction: {prediction}')
         print(f'Prediction Time: {prediction_time}')
         return prediction, prediction_time
