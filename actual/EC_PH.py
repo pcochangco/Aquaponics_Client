@@ -65,17 +65,17 @@ class sense():
             PH, EC = 0, 0
         return PH, EC
                   
-    def datalog(self,PH, EC, Size):
+    def datalog(self,PH, EC, Size, ip_time, train_time, predict_time, accuracy):
         try:
             dt_string = datetime.now().strftime("%d/%m/%Y")
             tm_string = datetime.now().strftime("%H:%M:%S")
             if os.path.isfile('output.csv'):
                 with open('output.csv', 'a') as f:
-                    f.write(str(dt_string) + "," + str(tm_string) + "," + str(PH) + "," + str(EC) + "," + str(Size) + "\n")
+                    f.write(str(dt_string) + "," + str(tm_string) + "," + str(PH) + "," + str(EC) + "," + str(Size) + "," + str(ip_time) + "," + str(train_time) + "," + str(predict_time) + "," + str(accuracy) + "\n")
             else: 
                 with open('output.csv', 'a') as f:
-                    f.write("Date" + "," + "Time" + "," + "PH Sensor" + "," + "EC Sensor" + "," + "Lettuce Area (in^2)" + "\n") 
-                    f.write(str(dt_string) + "," + str(tm_string) + "," + str(PH) + "," + str(EC) + "," + str(Size) + "\n")              
+                    f.write("Date" + "," + "Time" + "," + "PH Sensor" + "," + "EC Sensor" + "," + "Lettuce Area (in^2)" + "Image Processing time (s)" + "," + "Training time (s)" + "," + "Prediction time (s)" + "," + "Accuracy (%)" + "\n") 
+                    f.write(str(dt_string) + "," + str(tm_string) + "," + str(PH) + "," + str(EC) + "," + str(Size) + "," + str(ip_time) + "," + str(train_time) + "," + str(predict_time) + "," + str(accuracy) + "\n")
         except Exception as e:
             print("Can't open output csv file.", e)
      
