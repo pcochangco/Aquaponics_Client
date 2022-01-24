@@ -74,7 +74,7 @@ class sense():
                     f.write(str(dt_string) + "," + str(tm_string) + "," + str(PH) + "," + str(EC) + "," + str(Size) + "," + str(ip_time) + "," + str(train_time) + "," + str(predict_time) + "," + str(accuracy) + "," + str(prediction) + "\n")
             else: 
                 with open('output.csv', 'a') as f:
-                    f.write("Date" + "," + "Time" + "," + "PH Sensor" + "," + "EC Sensor" + "," + "Lettuce Area (in^2)" + "Image Processing time (s)" + "," + "Training time (s)" + "," + "Prediction time (s)" + "," + "Accuracy (%)" + "Pump State(1_ON/0_OFF)" + "\n") 
+                    f.write("Date" + "," + "Time" + "," + "PH Sensor" + "," + "EC Sensor" + "," + "Lettuce Area (in^2)" + "Image Processing time (s)" + "," + "Training time (s)" + "," + "Prediction time (s)" + "," + "Accuracy (%)" + "," + "Pump State (1_ON/0_OFF)" + "\n") 
                     f.write(str(dt_string) + "," + str(tm_string) + "," + str(PH) + "," + str(EC) + "," + str(Size) + "," + str(ip_time) + "," + str(train_time) + "," + str(predict_time) + "," + str(accuracy) + "," +  str(prediction) + "\n")
         except Exception as e:
             print("Can't open output csv file.", e)
